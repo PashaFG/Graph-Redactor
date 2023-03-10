@@ -28,8 +28,7 @@ export default {
   },
   data() {
     return {
-      currentTab: "MainUsers",
-      tabs: ["MainUsers", "CreateUserPage", "EditUserPage"]
+      currentTab: "MainUsers"
     }
   },
   methods: {

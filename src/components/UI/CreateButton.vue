@@ -3,7 +3,7 @@
     <span>
       <slot></slot>
     </span>
-</button>
+  </button>
 </template>
 <script>
 export default {

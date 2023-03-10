@@ -1,7 +1,7 @@
 <template>
   <div class="main__table">
     <div class="header">
-      <branches-button class="header_element">Добавить
+      <branches-button class="header_element" @click="this.setCurrentTab('CreateBranches')">Добавить
         заведение</branches-button>
       <div class="header_element"><span>{{ this.branchesCount }}</span></div>
       <div class="spacer__box"></div>
@@ -43,7 +43,7 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
   data() {
@@ -52,6 +52,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setCurrentTab: 'branches/setCurrentTab'
+    }),
     ...mapActions({
       fetchBranches: 'branches/fetchBranches',
       changeBranchId: 'branches/changeBranchId'

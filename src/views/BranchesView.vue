@@ -6,17 +6,25 @@
       </h2>
       <div class="spacer__box"></div>
     </div>
-    <MainBranches />
+    <component :is="this.currentTab"></component>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import MainBranches from '@/modules/BranchesEditor/components/MainBranches.vue'
+import CreateBranches from '@/modules/BranchesEditor/components/CreateBranches.vue'
 
 export default {
   components: {
     MainBranches,
+    CreateBranches
   },
+  computed: {
+    ...mapGetters({
+      currentTab: "branches/getCurrentTab"
+    })
+  }
 }
 </script>
 

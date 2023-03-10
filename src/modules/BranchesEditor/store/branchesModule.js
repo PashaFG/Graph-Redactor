@@ -1,16 +1,26 @@
 import axios from "axios"
 
+import { createBranchModule } from '@/modules/BranchesEditor/store/createBranchModule.js'
+
 export const branchesModule = {
   state: () => ({
     branches: [],
-    branchId: 0
+    branchId: 0,
+    currentTab: "MainBranches",
+    tabs: ["MainBranches"]
   }),
   getters: {
     allBranches(state) {
       return state.branches
     },
+    getCurrentTab(state) {
+      return state.currentTab
+    }
   },
   mutations: {
+    setCurrentTab(state, tab) {
+      state.currentTab = tab
+    },
     setBranches(state, branches) {
       state.branches = branches
     },
@@ -31,6 +41,9 @@ export const branchesModule = {
     changeBranchId(context, id) {
       context.commit('setBranchId', id)
     }
+  },
+  modules: {
+    create: createBranchModule
   },
   namespaced: true
 }

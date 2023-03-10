@@ -14,12 +14,12 @@ import DeleteIcon from '@/components/UI/Icon/DeleteIcon.vue'
 //UI Components
 import UserColorful from '@/components/UI/UserColorful.vue'
 import MainButton from '@/components/UI/MainButton.vue'
+import CreateButton from '@/components/UI/CreateButton.vue'
 import MainSelect from '@/components/UI/MainSelect.vue'
 import MainInput from '@/components/UI/MainInput.vue'
 
 
 //Modules components
-import CreateUserComponents from '@/modules/CreateUser/components/UI/index.js'
 import EditUserComponents from '@/modules/EditUser/components/UI/index.js'
 import UserListComponents from '@/modules/UserList/components/UI/index.js'
 import BranchesComponents from '@/modules/BranchesEditor/components/UI/index.js'
@@ -43,10 +43,10 @@ const components = [
   MainButton,
   MainSelect,
   MainInput,
+  CreateButton
 ]
 
 const modules = [
-  ...CreateUserComponents,
   ...EditUserComponents,
   ...UserListComponents,
   ...BranchesComponents
