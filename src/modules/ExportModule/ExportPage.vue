@@ -20,14 +20,6 @@
         </div>
       </div>
     </div>
-    <!-- <div v-for="row in this.getRows">
-      <div>
-        {{ row }}
-      </div>
-    </div>
-    <div>
-      {{ this.fullUsers }}
-    </div> -->
   </div>
 </template>
 <script>

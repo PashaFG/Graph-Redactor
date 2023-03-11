@@ -39,7 +39,6 @@ export default {
 </script>
 <style scoped>
 .rows {
-  display: flex;
-  flex-direction: column;
+  height: 100%;
 }
 </style>

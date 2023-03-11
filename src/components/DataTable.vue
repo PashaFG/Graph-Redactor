@@ -126,7 +126,6 @@ td {
   position: sticky;
   top: 0;
   background-color: #BBBFD4;
-
 }
 
 .scroll__snap {

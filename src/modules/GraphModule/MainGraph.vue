@@ -34,10 +34,7 @@ export default {
 
 .table {
   width: auto;
-  height: 100%;
-  overflow-y: auto;
-
-
+  height: calc(100vh - 200px);
   background-color: #DFD1C4;
   border: 2px solid #594845;
   border-radius: 10px;
