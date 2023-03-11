@@ -14,7 +14,7 @@
       <div class="spacer__box"></div>
     </div>
     <div class="list">
-      <div class="row" v-for="branch in this.allBranches">
+      <div class="row" v-for="branch in this.allBranches" :key="branch._id">
         <div class="cells__color">
           <div class="color__circle"
             :style="{ 'background-color': branch.exportColor, 'border-color': branch.exportColor }"></div>
@@ -25,24 +25,25 @@
           </span>
         </div>
         <div class="cells__userlimit">
-          <button class="userlimit__btn"><minus-icon /></button>
+          <button class="userlimit__btn" @click="minusUserLimit(branch)"><minus-icon /></button>
           {{ branch.userLimit }}
-          <button class="userlimit__btn"><plus-icon /></button>
+          <button class="userlimit__btn" @click="plusUserLimit(branch)"><plus-icon /></button>
         </div>
         <div class="spacer__box"></div>
         <div class="cells__delete">
-          <button class="delete__btn"><delete-icon /></button>
+          <button class="delete__btn" @click="this.deleteBranch(branch._id)"><delete-icon /></button>
         </div>
       </div>
     </div>
     <div class="footer">
-      <branches-button class="footer_element">Сохранить изменения</branches-button>
-      <branches-button class="footer_element">Отменить изменения</branches-button>
+      <branches-button class="footer_element" @click="this.save">Сохранить изменения</branches-button>
+      <branches-button class="footer_element" @click="this.cancel">Отменить изменения</branches-button>
       <div class="spacer__box"></div>
     </div>
   </div>
 </template>
 <script>
+import axios from 'axios'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
@@ -53,11 +54,15 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setCurrentTab: 'branches/setCurrentTab'
+      setCurrentTab: 'branches/setCurrentTab',
+      clearBranchToDelete: 'branches/clearBranchToDelete',
+      clearBranchToUpdate: 'branches/clearBranchToUpdate',
     }),
     ...mapActions({
       fetchBranches: 'branches/fetchBranches',
-      changeBranchId: 'branches/changeBranchId'
+      changeBranchId: 'branches/changeBranchId',
+      deleteBranch: 'branches/deleteBranch',
+      updateBranch: 'branches/updateBranch',
     }),
     setBranchesCount() {
       if (this.allBranches.length === 0) {
@@ -82,11 +87,64 @@ export default {
             break;
         }
       }
+    },
+    cancel() {
+      this.fetchBranches()
+      this.clearBranchToDelete()
+      this.clearBranchToUpdate()
+    },
+    async save() {
+      const promises = []
+      this.getBranchToDelete.forEach((branchId) => {
+        let res = this.fetchDeleteBranch(branchId)
+        promises.push(res)
+      })
+      this.getBranchToUpdate.forEach((branchId) => {
+        let branch = this.allBranches.find(element => element._id === branchId)
+        this.fetchEditBranch(branchId, branch)
+      })
+      this.clearBranchToDelete()
+      this.clearBranchToUpdate()
+      Promise.all(promises)
+      setTimeout(this.fetchBranches, 500)
+    },
+    fetchDeleteBranch(id) {
+      try {
+        let { data } = axios.delete(`http://${window.location.hostname}:3000/v1/branches/${id}`);
+        return data
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async fetchEditBranch(id, branch) {
+      try {
+        await axios.put(`http://${window.location.hostname}:3000/v1/branches/${id}`, {
+          name: branch.name,
+          login: branch.login,
+          exportColor: branch.exportColor,
+          userLimit: branch.userLimit
+        });
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    plusUserLimit(branch) {
+      branch.userLimit++
+      this.updateBranch(branch)
+    },
+    minusUserLimit(branch) {
+      if (branch.userLimit > 0) {
+        branch.userLimit += -1
+        this.updateBranch(branch)
+      }
     }
   },
   computed: {
     ...mapGetters({
       allBranches: 'branches/allBranches',
+      getBranchToDelete: 'branches/getBranchToDelete',
+      getBranchToUpdate: 'branches/getBranchToUpdate',
+      getBranchById: 'branches/getBranchById'
     })
   },
   async mounted() {

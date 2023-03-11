@@ -40,10 +40,6 @@ export const tableModule = {
           state.rows[row] = newRow
         }
       }
-      state.rows.forEach((row) => {
-        if (row._id === newRow._id) {
-        }
-      })
     }
   },
   actions: {
