@@ -7,12 +7,13 @@
         <p><strong>{{ branch.name }}</strong></p>
       </div>
 
-      <div v-for="row in   this.tableData">
+      <div v-for="row in this.tableData">
         <div v-if="!branch.login" class="cells">
           <p>{{ row.name }}</p>
         </div>
         <div v-else class="users">
-          <div v-for="user in row[branch.login]" class="cells__user">
+          <div v-for="user in row[branch.login]" class="cells__user"
+            @drop="onDropTable($event, row, branch.login, user.id)" @dragenter.prevent @dragover.prevent>
             <user-colorful :user="getUserByID(user.userID)"></user-colorful>
           </div>
         </div>
@@ -123,7 +124,7 @@ import { mapGetters, mapActions, mapMutations } from 'vuex'
 //         });
 //       } catch (e) {
 //         console.log(e)
-//       } finally { console.log('updatedRow') }
+//       } 
 //     },
 //     getUserByID(id) {
 //       return this.allUsers.filter((user) => user._id === id)
@@ -155,6 +156,7 @@ export default {
     ...mapMutations({
       setStartDate: 'table/setStartDate',
       setEndDate: 'table/setEndDate',
+      updateRow: 'table/updateRow',
     }),
     ...mapActions({
       fetchRows: 'table/fetchRows',
@@ -162,10 +164,21 @@ export default {
       fetchBranches: 'branches/fetchBranches',
     }),
     getUserByID(id) {
-      console.log(id);
       return this.fullUsers.find(element => element._id === id)
     },
-
+    async onDropTable(event, row, branch, id) {
+      let userID = Number(event.dataTransfer.getData('userID'))
+      let newRow = JSON.parse(JSON.stringify(row))
+      newRow[branch][id - 1].userID = userID
+      this.updateRow(newRow)
+      try {
+        await axios.put(`http://${window.location.hostname}:3000/v1/rows/`, {
+          row: newRow
+        });
+      } catch (e) {
+        console.log(e)
+      }
+    },
   }
 }
 
