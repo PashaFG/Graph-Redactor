@@ -14,9 +14,7 @@ import DeleteIcon from '@/components/UI/Icon/DeleteIcon.vue'
 
 //UI Components
 import UserColorful from '@/components/UI/UserColorful.vue'
-import MainButton from '@/components/UI/MainButton.vue'
 import GraphButton from '@/components/UI/GraphButton.vue'
-import CreateButton from '@/components/UI/CreateButton.vue'
 import MainSelect from '@/components/UI/MainSelect.vue'
 import MainInput from '@/components/UI/MainInput.vue'
 
