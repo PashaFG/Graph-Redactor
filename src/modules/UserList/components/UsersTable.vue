@@ -1,7 +1,8 @@
 <template>
   <div class="header">
-    <userlist-button class="header_element" @click="this.$emit('goIn')">Добавить
-      сотрудника</userlist-button>
+    <graph-button class="header_element"
+      v-class="'filled'"
+      @click="this.$emit('goIn')"><template #label>Добавить сотрудника</template></graph-button>
     <div class="header_element"><span>{{ this.usersCount }}</span></div>
     <div class="spacer__box"></div>
     <userlist-search class="header_element" />
@@ -13,9 +14,12 @@
     <div class="spacer__box"></div>
   </div>
   <div class="list">
-    <div class="row" v-for="user in this.allUsers" @click="goEdit(user._id)">
+    <div class="row"
+      v-for="user in this.allUsers"
+      @click="goEdit(user._id)">
       <div class="cells__color">
-        <div class="color__circle" :style="{ 'background-color': user.color, 'border-color': user.color }"></div>
+        <div class="color__circle"
+          :style="{ 'background-color': user.color, 'border-color': user.color }"></div>
       </div>
       <div class="cells__name">
         <span>

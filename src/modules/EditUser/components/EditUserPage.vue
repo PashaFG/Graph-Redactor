@@ -2,15 +2,22 @@
   <div class="main">
     <div class="edit__row">
       <span class="label">Фамилия</span>
-      <main-input type="text" :model-value="this.getUser.name" @update:model-value="this.setName" placeholder="Иванов" />
+      <main-input type="text"
+        :model-value="this.getUser.name"
+        @update:model-value="this.setName"
+        placeholder="Иванов" />
     </div>
     <div class="edit__row">
       <span class="label">Должность</span>
-      <main-select :model-value="this.getUser.title" @update:model-value="this.setTitle" :options="this.titles" />
+      <main-select :model-value="this.getUser.title"
+        @update:model-value="this.setTitle"
+        :options="this.titles" />
     </div>
     <div class="edit__row">
       <span class="label">Цвет таблички</span>
-      <main-input type="text" :model-value="this.getUser.color" @update:model-value="this.setColor"
+      <main-input type="text"
+        :model-value="this.getUser.color"
+        @update:model-value="this.setColor"
         placeholder="#46bdc6" />
     </div>
     <div class="divider"></div>
@@ -19,10 +26,28 @@
       <user-colorful :user="this.getUser"></user-colorful>
     </div>
     <div class="edit__row">
-      <edit-button class="row__element" @click="updateUser">Сохранить</edit-button>
-      <edit-button class="row__element" @click="this.$emit('goTo')">Отменить</edit-button>
+      <graph-button class="row__element"
+        v-class="'outlined'"
+        @click="this.$emit('goTo')">
+        <template #label>
+          Отменить
+        </template>
+      </graph-button>
+      <graph-button class="row__element"
+        v-class="'filled'"
+        @click="updateUser">
+        <template #label>
+          Сохранить
+        </template>
+      </graph-button>
       <div class="spacer__box"></div>
-      <alert-button class="row__element" @click="deleteUser">Удалить</alert-button>
+      <graph-button class="row__element"
+        v-class="'alert'"
+        @click="deleteUser">
+        <template #label>
+          Удалить
+        </template>
+      </graph-button>
     </div>
   </div>
 </template>

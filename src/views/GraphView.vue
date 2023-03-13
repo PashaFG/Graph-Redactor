@@ -5,8 +5,20 @@
         Редактор / Январь
       </h2>
       <div class="spacer__box" />
-      <main-button class="title__element" @click="$router.push('/users')">К списку сотрудников</main-button>
-      <main-button class="title__element" @click="setDatepickerVisible($event)">Выбрать даты</main-button>
+      <graph-button class="title__element"
+        v-class="'filled'"
+        @click="$router.push('/users')">
+        <template #label>
+          К списку сотрудников
+        </template>
+      </graph-button>
+      <graph-button class="title__element"
+        v-class="'filled'"
+        @click="setDatepickerVisible($event)">
+        <template #label>
+          Выбрать даты
+        </template>
+      </graph-button>
       <button class="title__element import__btn"><exel-icon /></button>
       <router-link :to="{ name: 'export', params: { start: this.getDatePeriod.start, end: this.getDatePeriod.end } }"
         target="_blank">

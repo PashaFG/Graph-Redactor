@@ -1,10 +1,18 @@
 <template>
   <div>
-    <div class="rows" v-if="this.getRows.length > 1">
+    <div class="rows"
+      v-if="this.getRows.length > 1">
       <DataTable :tableData="this.getRows"></DataTable>
     </div>
-    <div v-else>
-      <main-button @click="this.fetchRows">Загрузить график</main-button>
+    <div class="blankRows"
+      v-else>
+      <graph-button @click="
+        setDatepickerVisible($event)"
+        v-class="'filled'">
+        <template #label>
+          Выбрать даты
+        </template>
+      </graph-button>
     </div>
   </div>
 </template>
@@ -20,10 +28,12 @@ export default {
     ...mapGetters({
       getDatePeriod: 'table/getDatePeriod',
       getRows: 'table/getRows',
+      getDatepickerVisible: 'table/getDatepickerVisible'
     })
   },
   methods: {
     ...mapMutations({
+      setDatepickerVisible: 'table/setDatepickerVisible'
     }),
     ...mapActions({
       fetchBranches: 'branches/fetchBranches',
@@ -40,5 +50,12 @@ export default {
 <style scoped>
 .rows {
   height: 100%;
+}
+
+.blankRows {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
 }
 </style>

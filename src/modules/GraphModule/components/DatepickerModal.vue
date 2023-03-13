@@ -1,14 +1,23 @@
 <template>
-  <div class="datepicker__dialog" v-if="this.getDatepickerVisible" @click="this.setDatepickerVisible(false)">
-    <div class="dialog__content" @click.stop>
+  <div class="datepicker__dialog"
+    v-if="this.getDatepickerVisible"
+    @click="this.setDatepickerVisible(false)">
+    <div class="dialog__content"
+      @click.stop>
       <div class="datepicker__row">
         <span class="datepicker__title">Start date</span>
-        <datepicker class="datepicker" :minimumView="'day'" :maximumView="'year'" v-model="this.startDate">
+        <datepicker class="datepicker"
+          :minimumView="'day'"
+          :maximumView="'year'"
+          v-model="this.startDate">
         </datepicker>
       </div>
       <div class="datepicker__row">
         <span class="datepicker__title">End date</span>
-        <datepicker class="datepicker" :minimumView="'day'" :maximumView="'year'" v-model="this.endDate">
+        <datepicker class="datepicker"
+          :minimumView="'day'"
+          :maximumView="'year'"
+          v-model="this.endDate">
         </datepicker>
       </div>
       <div class="datepicker__alert">
@@ -21,9 +30,24 @@
         </span>
       </div>
       <div class="datepicker__row">
-        <main-button @click="this.setDatepickerVisible(false)">Отменить</main-button>
-        <main-button @click="loadOldRows">Загрузить имеющиеся</main-button>
-        <main-button @click="acceptNewPeriod">Создать новые</main-button>
+        <graph-button @click="this.setDatepickerVisible(false)"
+          v-class="'outlined'">
+          <template #label>
+            Отменить
+          </template>
+        </graph-button>
+        <graph-button @click="loadOldRows"
+          v-class="'filled'">
+          <template #label>
+            Загрузить имеющиеся
+          </template>
+        </graph-button>
+        <graph-button @click="acceptNewPeriod"
+          v-class="'alert'">
+          <template #label>
+            Создать новые
+          </template>
+        </graph-button>
       </div>
     </div>
   </div>
@@ -114,7 +138,7 @@ export default {
   text-align: left;
   padding: 10px;
   margin-bottom: 20px;
-  background-color: rgba(250, 250, 132, 0.973);
+  background-color: #DFD1C4;
   border-radius: 10px;
 }
 

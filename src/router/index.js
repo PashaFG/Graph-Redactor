@@ -3,6 +3,7 @@ import GraphView from '@/views/GraphView.vue'
 import AnalyticsView from '@/views/AnalyticsView.vue'
 import UsersView from '@/views/UsersView.vue'
 import BranchesView from '@/views/BranchesView.vue'
+import StyleGuide from '@/views/StyleGuide.vue'
 import ExportPage from '@/modules/ExportModule/ExportPage.vue'
 
 const routes = [
@@ -11,6 +12,11 @@ const routes = [
     name: 'graph',
     component: GraphView,
     alias: '/'
+  },
+  {
+    path: '/style',
+    name: 'style',
+    component: StyleGuide,
   },
   {
     path: '/analytics',

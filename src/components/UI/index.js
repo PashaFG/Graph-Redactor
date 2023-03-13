@@ -2,6 +2,7 @@
 import UsersIcon from '@/components/UI/Icon/UsersIcon.vue'
 import AnalyticsIcon from '@/components/UI/Icon/AnalyticsIcon.vue'
 import GearIcon from '@/components/UI/Icon/GearIcon.vue'
+import GearIcon24 from '@/components/UI/Icon/GearIcon24.vue'
 import BranchIcon from '@/components/UI/Icon/BranchIcon.vue'
 import ExelIcon from '@/components/UI/Icon/ExelIcon.vue'
 import PrintIcon from '@/components/UI/Icon/PrintIcon.vue'
@@ -14,20 +15,20 @@ import DeleteIcon from '@/components/UI/Icon/DeleteIcon.vue'
 //UI Components
 import UserColorful from '@/components/UI/UserColorful.vue'
 import MainButton from '@/components/UI/MainButton.vue'
+import GraphButton from '@/components/UI/GraphButton.vue'
 import CreateButton from '@/components/UI/CreateButton.vue'
 import MainSelect from '@/components/UI/MainSelect.vue'
 import MainInput from '@/components/UI/MainInput.vue'
 
 
 //Modules components
-import EditUserComponents from '@/modules/EditUser/components/UI/index.js'
 import UserListComponents from '@/modules/UserList/components/UI/index.js'
-import BranchesComponents from '@/modules/BranchesEditor/components/UI/index.js'
 
 const icons = [
   UsersIcon,
   AnalyticsIcon,
   GearIcon,
+  GearIcon24,
   BranchIcon,
   ExelIcon,
   PrintIcon,
@@ -43,13 +44,12 @@ const components = [
   MainButton,
   MainSelect,
   MainInput,
-  CreateButton
+  CreateButton,
+  GraphButton
 ]
 
 const modules = [
-  ...EditUserComponents,
   ...UserListComponents,
-  ...BranchesComponents
 ]
 
 export default [

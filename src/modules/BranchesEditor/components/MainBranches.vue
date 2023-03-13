@@ -1,8 +1,13 @@
 <template>
   <div class="main__table">
     <div class="header">
-      <branches-button class="header_element" @click="this.setCurrentTab('CreateBranches')">Добавить
-        заведение</branches-button>
+      <graph-button class="header_element"
+        v-class="'filled'"
+        @click="this.setCurrentTab('CreateBranches')">
+        <template #label>
+          Добавить заведение
+        </template>
+      </graph-button>
       <div class="header_element"><span>{{ this.branchesCount }}</span></div>
       <div class="spacer__box"></div>
       <userlist-search class="header_element" />
@@ -14,7 +19,9 @@
       <div class="spacer__box"></div>
     </div>
     <div class="list">
-      <div class="row" v-for="branch in this.allBranches" :key="branch._id">
+      <div class="row"
+        v-for="branch in this.allBranches"
+        :key="branch._id">
         <div class="cells__color">
           <div class="color__circle"
             :style="{ 'background-color': branch.exportColor, 'border-color': branch.exportColor }"></div>
@@ -25,19 +32,34 @@
           </span>
         </div>
         <div class="cells__userlimit">
-          <button class="userlimit__btn" @click="minusUserLimit(branch)"><minus-icon /></button>
+          <button class="userlimit__btn"
+            @click="minusUserLimit(branch)"><minus-icon /></button>
           {{ branch.userLimit }}
-          <button class="userlimit__btn" @click="plusUserLimit(branch)"><plus-icon /></button>
+          <button class="userlimit__btn"
+            @click="plusUserLimit(branch)"><plus-icon /></button>
         </div>
         <div class="spacer__box"></div>
         <div class="cells__delete">
-          <button class="delete__btn" @click="this.deleteBranch(branch._id)"><delete-icon /></button>
+          <button class="delete__btn"
+            @click="this.deleteBranch(branch._id)"><delete-icon /></button>
         </div>
       </div>
     </div>
     <div class="footer">
-      <branches-button class="footer_element" @click="this.save">Сохранить изменения</branches-button>
-      <branches-button class="footer_element" @click="this.cancel">Отменить изменения</branches-button>
+      <graph-button class="footer_element"
+        v-class="'filled'"
+        @click="this.save">
+        <template #label>
+          Сохранить изменения
+        </template>
+      </graph-button>
+      <graph-button class="footer_element"
+        v-class="'outlined'"
+        @click="this.cancel">
+        <template #label>
+          Отменить изменения
+        </template>
+      </graph-button>
       <div class="spacer__box"></div>
     </div>
   </div>
@@ -192,7 +214,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: fit-content;
+  height: 50px;
 
   padding-top: 15px;
   border-top: 1px solid #594845;

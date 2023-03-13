@@ -5,13 +5,23 @@
         Сотрудники
       </h2>
       <div class="spacer__box"></div>
-      <main-button v-if="!(this.currentTab !== 'MainUsers')" class="title__element"
-        @click="this.currentTab = 'CreateUserPage'">Создать сотрудника</main-button>
-      <main-button v-else class="title__element" @click="this.currentTab = 'MainUsers'">
-        Вернуться к списку сотрудников
-      </main-button>
+      <graph-button v-if="!(this.currentTab !== 'MainUsers')"
+        v-class="'filled'"
+        class="title__element"
+        @click="this.currentTab = 'CreateUserPage'">
+        <template #label>Создать сотрудника</template>
+      </graph-button>
+      <graph-button v-else
+        class="title__element"
+        v-class="'filled'"
+        @click="this.currentTab = 'MainUsers'">
+        <template #label>Вернуться к списку сотрудников</template>
+      </graph-button>
     </div>
-    <component :is="currentTab" @go-to="goTo" @go-in="goIn" @go-edit="goEdit"></component>
+    <component :is="currentTab"
+      @go-to="goTo"
+      @go-in="goIn"
+      @go-edit="goEdit"></component>
   </div>
 </template>
 
